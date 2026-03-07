@@ -1,4 +1,4 @@
-
+#!src/llm_client.py
 import logging
 from typing import Any
 from transformers import pipeline
