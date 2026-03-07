@@ -1,4 +1,4 @@
-
+#!src/agent.py
 import json
 import logging
 from typing import Iterator
@@ -73,19 +73,3 @@ class PaymentFailureAgent:
         prompt = self._build_prompt(transaction)
         raw_response = self._llm_client.generate_response(prompt)
         return self._parse_analysis(raw_response)
-
-    def process_batch(self, transactions: Iterator[TransactionData]) -> Iterator[PaymentFailureAnalysis]:
-        """Processes a batch of transactions iteratively.
-
-        Args:
-            transactions: An iterator yielding transaction data.
-
-        Yields:
-            PaymentFailureAnalysis objects.
-        """
-        for transaction in transactions:
-            try:
-                yield self.analyze_transaction(transaction)
-            except Exception as error:
-                logger.error(f"Error processing {transaction.transaction_id}: {error}")
-
